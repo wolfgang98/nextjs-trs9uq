@@ -13,7 +13,6 @@
 .home > .bar {
   background-color: #444;
   padding: 0.5rem;
-  overflow-y: scroll;
 
   > * {
     display: flex;
@@ -25,4 +24,5 @@
 
 .home > .content {
   padding: 0.5rem;
+  overflow-y: scroll;
 }
