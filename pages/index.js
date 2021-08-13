@@ -1,13 +1,18 @@
-import Head from 'next/head';
-import { useRef, useMemo } from 'react';
+import Layout from '@/components/layout';
+import styles from '@/styles/home.module.scss';
+import { getBucketById } from '@/lib/api';
 
-import Layout from '../components/layout';
-import styles from '../styles/home.module.scss';
+import IconButton from '@material-ui/core/IconButton';
+import HomeIcon from '@material-ui/icons/Home';
 
-export default function Home() {
+export default function Home({ bucket }) {
   return (
     <div className={styles.home}>
-      <nav />
+      <div className={styles.nav}>
+        <IconButton>
+          <HomeIcon />
+        </IconButton>
+      </div>
       <div className={styles.bar}>
         <div
           className="droppable-element"
@@ -19,8 +24,15 @@ export default function Home() {
         </div>
       </div>
       <div className={styles.content}>
-        <Layout className={styles.layout} cols={3} margin={10} />
+        <Layout className={styles.layout} cols={3} margin={10} bucket={bucket} />
       </div>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const bucket = (await getBucketById('1') || []);
+  return {
+    props: { bucket },
+  }
 }
